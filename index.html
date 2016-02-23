@@ -12,7 +12,7 @@
 </head>
 
 <body ng-app="todomvc">
-    
+
 
     <!--<script type="text/ng-template" id="todolist.html">
             <h1>Todo MVC</h1>
@@ -21,7 +21,21 @@
     <section class='todoapp' ng-controller="todoCtrl">
         <header class="header">
             <h1>todos</h1>
+            <form class="todo-form" ng-submit="vm.addTodo()">
+                <input type="text" class="new-todo" autofocus ng-model="newTodo">
+                <input type="submit" value="add">
+            </form>
         </header>
+        <section class="main">
+            <input type="checkbox">
+            <ul class="todo-list">
+                <li ng-repeat="todo in todos">
+                    <div class="view">
+                        <lable>{{todo.title}}</lable>
+                    </div>
+                </li>
+            </ul>
+        </section>
     </section>
 
 </body>
