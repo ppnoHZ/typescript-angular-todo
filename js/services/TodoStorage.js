@@ -5,7 +5,7 @@ var todos;
     * 本地存储服务
     */
     var TodoStorage = (function () {
-        function TodoStorage(parameters) {
+        function TodoStorage() {
             this.STORAGE_ID = 'todos-angularjs-typescript';
         }
         TodoStorage.prototype.get = function () {

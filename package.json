@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile":"tsc --sourcemap --out js/app1.js js/_all.ts"
+    "compile":"tsc --sourcemap --out js/app.js js/_all.ts"
   },
   "author": "zhoudd",
   "license": "ISC",

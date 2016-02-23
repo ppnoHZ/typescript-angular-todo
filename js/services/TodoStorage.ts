@@ -6,9 +6,7 @@ module todos {
     */
     export class TodoStorage implements ITodoStorage {
         STORAGE_ID = 'todos-angularjs-typescript';
-        constructor(parameters) {
-
-        }
+ 
         get(): TodoItem[] {
             return JSON.parse(localStorage.getItem(this.STORAGE_ID) || '[]')
         }

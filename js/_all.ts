@@ -5,3 +5,5 @@
 /// <reference path="interface/ITodoScope.ts" />
 /// <reference path="controller/TodoCtrl.ts" />
 /// <reference path="interface/ITodoStorage.ts" />
+///<reference path="services/TodoStorage.ts"/>
+///<reference path="app.ts"/>
