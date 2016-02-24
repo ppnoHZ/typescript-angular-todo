@@ -37,6 +37,11 @@ var todos;
             this.todos.push(new todos.TodoItem(newTodo, false));
             this.$scope.newTodo = '';
         };
+        TodoCtrl.prototype.markAll = function (completed) {
+            this.todos.forEach(function (todoItem) {
+                todoItem.completed = completed;
+            });
+        };
         //注入，同构造函数的参数要一致
         // See http://docs.angularjs.org/guide/di
         TodoCtrl.$inject = ["$scope", "$location", "todoStorage"];

@@ -32,5 +32,10 @@ module todos {
             this.todos.push(new TodoItem(newTodo, false));
             this.$scope.newTodo = '';
         }
+        markAll(completed: boolean) {
+            this.todos.forEach(todoItem=> {
+                todoItem.completed = completed;
+            })
+        }
     }
 }
