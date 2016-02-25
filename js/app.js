@@ -14,9 +14,10 @@ var todos;
 var todos;
 (function (todos) {
     var TodoCtrl = (function () {
-        function TodoCtrl($scope, $location, todoStorage) {
+        function TodoCtrl($scope, $log, $location, todoStorage) {
             var _this = this;
             this.$scope = $scope;
+            this.$log = $log;
             this.$location = $location;
             this.todoStorage = todoStorage;
             this.todos = $scope.todos = todoStorage.get();
@@ -26,15 +27,17 @@ var todos;
             $scope.$watch('todos', function () { return _this.onTodos(); }, true);
         }
         TodoCtrl.prototype.onTodos = function () {
+            console.log('onTodos');
             this.todoStorage.put(this.todos);
         };
         TodoCtrl.prototype.addTodo = function () {
-            console.log('addTodo', this.$scope.newTodo.trim());
+            this.$log.info('addTodo', this.$scope.newTodo.trim());
             var newTodo = this.$scope.newTodo.trim();
             if (!newTodo.length) {
                 return;
             }
             this.todos.push(new todos.TodoItem(newTodo, false));
+            this.$log.info('addTodo', this.$scope.newTodo.trim());
             this.$scope.newTodo = '';
         };
         TodoCtrl.prototype.markAll = function (completed) {
@@ -42,9 +45,14 @@ var todos;
                 todoItem.completed = completed;
             });
         };
+        TodoCtrl.prototype.doneEditing = function (todoItem) {
+            console.log('doneEditing');
+            this.$scope.editedTodo = null;
+            // this.$scope.ori
+        };
         //注入，同构造函数的参数要一致
         // See http://docs.angularjs.org/guide/di
-        TodoCtrl.$inject = ["$scope", "$location", "todoStorage"];
+        TodoCtrl.$inject = ["$scope", "$log", "$location", "todoStorage",];
         return TodoCtrl;
     })();
     todos.TodoCtrl = TodoCtrl;
@@ -70,12 +78,32 @@ var todos;
     })();
     todos_1.TodoStorage = TodoStorage;
 })(todos || (todos = {}));
+/// <reference path="../_all.ts" />
+var todos;
+(function (todos) {
+    function todoBlur() {
+        return {
+            link: function ($scope, element, attributes) {
+                console.log('directives todoBlur');
+                element.bind('blur', function () {
+                    //执行标签属性todoBlur对应的方法
+                    $scope.$apply(attributes.todoBlur);
+                });
+                $scope.$on('$destory', function () {
+                    element.unbind('blur');
+                });
+            }
+        };
+    }
+    todos.todoBlur = todoBlur;
+})(todos || (todos = {}));
 /// <reference path="_all.ts" />
 var todos;
 (function (todos) {
     'use strict';
     var todomvc = angular.module('todomvc', [])
         .controller('todoCtrl', todos.TodoCtrl)
+        .directive('todoBlur', todos.todoBlur)
         .service('todoStorage', todos.TodoStorage);
 })(todos || (todos = {}));
 ///<reference path="../typings/jquery/jquery.d.ts"/>
@@ -86,5 +114,6 @@ var todos;
 /// <reference path="controller/TodoCtrl.ts" />
 /// <reference path="interface/ITodoStorage.ts" />
 ///<reference path="services/TodoStorage.ts"/>
+/// <reference path="directives/TodoBlur.ts" />
 ///<reference path="app.ts"/>
 //# sourceMappingURL=app.js.map

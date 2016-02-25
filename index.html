@@ -38,6 +38,9 @@
                         <label>{{todo.title}}</label>
                         <button class="destory" ng-class="vm.removeTodo(todo)"></button>
                     </div>
+                    <form ng-submit="vm.doneEditing(todo)">
+                        <input type="text" class="edit" ng-model="todo.title" todo-blur="vm.doneEditing(todo)">
+                    </form>
                 </li>
             </ul>
         </section>
