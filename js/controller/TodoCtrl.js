@@ -15,17 +15,17 @@ var todos;
             $scope.$watch('todos', function () { return _this.onTodos(); }, true);
         }
         TodoCtrl.prototype.onTodos = function () {
-            console.log('onTodos');
+            console.log('onTodos', this.todos);
             this.todoStorage.put(this.todos);
         };
         TodoCtrl.prototype.addTodo = function () {
-            this.$log.info('addTodo', this.$scope.newTodo.trim());
             var newTodo = this.$scope.newTodo.trim();
             if (!newTodo.length) {
                 return;
             }
+            this.$log.info('addTodo前', this.todos);
             this.todos.push(new todos.TodoItem(newTodo, false));
-            this.$log.info('addTodo', this.$scope.newTodo.trim());
+            this.$log.info('addTodo之后', this.todos);
             this.$scope.newTodo = '';
         };
         TodoCtrl.prototype.markAll = function (completed) {

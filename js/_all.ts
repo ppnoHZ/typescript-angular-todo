@@ -7,4 +7,6 @@
 /// <reference path="interface/ITodoStorage.ts" />
 ///<reference path="services/TodoStorage.ts"/>
 /// <reference path="directives/TodoBlur.ts" />
+/// <reference path="directives/TodoEscape.ts" />
+/// <reference path="directives/TodoFocus.ts" />
 ///<reference path="app.ts"/>
